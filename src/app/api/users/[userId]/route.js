@@ -1,7 +1,13 @@
-import React from "react";
+import { NextResponse } from "next/server";
 
-const route = () => {
-  return <div>Dynamic Users</div>;
-};
+export function GET(request) {
+  return NextResponse.json({
+    message: "Hello World",
+  });
+}
 
-export default route;
+export function POST() {}
+
+export function DELETE() {}
+
+export function PUT() {}
