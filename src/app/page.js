@@ -1,6 +1,10 @@
+import dbConnect from "@/helper/db";
+
 export const metadata = {
   title: "Home : Work Manager",
 };
+
+dbConnect();
 
 export default function Home() {
   return (

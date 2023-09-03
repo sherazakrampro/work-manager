@@ -18,7 +18,7 @@ const AddTask = () => {
               type="text"
               name="task_title"
               id="task_title"
-              className="bg-slate-500 h-10 rounded-md p-3 mb-4"
+              className="bg-slate-500 rounded-md p-3 mb-4"
             />
           </div>
           <div className="flex flex-col">
@@ -38,10 +38,9 @@ const AddTask = () => {
               Status
             </label>
             <select
-              type="text"
               name="task_status"
               id="task_status"
-              className="bg-slate-500 h-10 rounded-md p-3 mb-4"
+              className="bg-slate-500 rounded-md p-3 mb-4"
             >
               <option value="---Select Status---">* Select Status *</option>
               <option value="pending">Pending</option>
