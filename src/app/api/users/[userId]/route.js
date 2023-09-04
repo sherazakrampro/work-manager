@@ -7,7 +7,8 @@ export async function GET(request, { params }) {
   try {
     const user = await User.findById({
       _id: userId,
-    });
+    }).select("-password"); // password will not be shown
+
     return NextResponse.json(user, {
       success: true,
     });

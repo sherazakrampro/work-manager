@@ -8,7 +8,7 @@ dbConnect();
 export async function GET(request) {
   let users = [];
   try {
-    users = await User.find();
+    users = await User.find().select("-password"); // password will not be shown
   } catch (error) {
     console.log(error);
     return NextResponse.json({
