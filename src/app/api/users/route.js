@@ -1,12 +1,25 @@
 import { User } from "@/models/user";
 import { NextResponse } from "next/server";
+import dbConnect from "@/helper/db";
 
-export function GET(request) {
-  return NextResponse.json({
-    message: "Hello World",
-  });
+dbConnect();
+
+// Get All Users
+export async function GET(request) {
+  let users = [];
+  try {
+    users = await User.find();
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({
+      message: "Failed to get users",
+      success: false,
+    });
+  }
+  return NextResponse.json(users);
 }
 
+// Create a New User
 export async function POST(request) {
   const { name, email, password, about, profileURL } = await request.json();
   const user = new User({
@@ -30,7 +43,3 @@ export async function POST(request) {
     });
   }
 }
-
-export function DELETE() {}
-
-export function PUT() {}

@@ -4,6 +4,7 @@ const userSchema = new Schema({
   name: String,
   email: {
     type: String,
+    unique: true,
     required: [true, "Email is required"],
   },
   password: {
@@ -20,4 +21,5 @@ const userSchema = new Schema({
   //   },
 });
 
-export const User = mongoose.model.users || mongoose.model("users", userSchema);
+export const User =
+  mongoose.models.users || mongoose.model("users", userSchema);
