@@ -35,9 +35,6 @@ export async function POST(request) {
   } catch (error) {
     console.log(error);
 
-    return NextResponse.json({
-      message: "Failed to create a task",
-      success: false,
-    });
+    return getResponseMessage("Failed to create task", false, 500);
   }
 }
