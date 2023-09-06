@@ -2,8 +2,9 @@ import getResponseMessage from "@/helper/responseMessage";
 import { Task } from "@/models/task";
 import { NextResponse } from "next/server";
 
-export async function GET(request, params) {
+export async function GET(request, { params }) {
   const { userId } = params;
+
   try {
     const tasks = await Task.find({
       userId: userId,
@@ -12,6 +13,7 @@ export async function GET(request, params) {
     return NextResponse.json(tasks);
   } catch (error) {
     console.log(error);
+
     return getResponseMessage("Failed to get user tasks", false, 404);
   }
 }
