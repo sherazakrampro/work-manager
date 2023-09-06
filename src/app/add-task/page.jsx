@@ -1,15 +1,36 @@
-import React from "react";
+"use client";
+import { addTask } from "@/services/taskService";
+import React, { useState } from "react";
 
 export const metadata = {
   title: "Add Task : Work Manager",
 };
 
 const AddTask = () => {
+  const [task, setTask] = useState({
+    title: "",
+    content: "",
+    status: "none",
+    userId: "64f747e348d3fb54fb691beb",
+  });
+
+  const handleAddTask = async (event) => {
+    event.preventDefault();
+    console.log(task);
+
+    try {
+      const result = await addTask(task);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <div className="flex justify-center m-5">
+    <div className="flex justify-center m-2">
       <div className=" w-1/2 p-5 shadow-sm">
         <h1 className="text-3xl flex justify-center mb-4">Add Task</h1>
-        <form action="submit">
+        <form action="submit" onSubmit={handleAddTask}>
           <div className="flex flex-col">
             <label htmlFor="task_title" className="mb-1">
               Title
@@ -19,6 +40,13 @@ const AddTask = () => {
               name="task_title"
               id="task_title"
               className="bg-slate-500 rounded-md p-3 mb-4"
+              onChange={(event) => {
+                setTask({
+                  ...task,
+                  title: event.target.value,
+                });
+              }}
+              value={task.title}
             />
           </div>
           <div className="flex flex-col">
@@ -31,6 +59,13 @@ const AddTask = () => {
               id="task_content"
               className="bg-slate-500 rounded-md p-3 mb-4"
               rows={5}
+              onChange={(event) => {
+                setTask({
+                  ...task,
+                  content: event.target.value,
+                });
+              }}
+              value={task.content}
             />
           </div>
           <div className="flex flex-col">
@@ -41,8 +76,17 @@ const AddTask = () => {
               name="task_status"
               id="task_status"
               className="bg-slate-500 rounded-md p-3 mb-4"
+              onChange={(event) => {
+                setTask({
+                  ...task,
+                  status: event.target.value,
+                });
+              }}
+              value={task.status}
             >
-              <option value="---Select Status---">* Select Status *</option>
+              <option value="none" disabled>
+                * Select Status *
+              </option>
               <option value="pending">Pending</option>
               <option value="completed">Completed</option>
             </select>

@@ -5,7 +5,7 @@ export const metadata = {
 export default function Home() {
   return (
     <main>
-      <h1 className="text-3xl m-5">Welcome to Work Manager.</h1>
+      <h1 className="text-3xl m-4">Welcome to Work Manager.</h1>
     </main>
   );
 }
