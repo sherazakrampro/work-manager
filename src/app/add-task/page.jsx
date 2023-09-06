@@ -1,6 +1,7 @@
 "use client";
 import { addTask } from "@/services/taskService";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 export const metadata = {
   title: "Add Task : Work Manager",
@@ -21,8 +22,20 @@ const AddTask = () => {
     try {
       const result = await addTask(task);
       console.log(result);
+      toast.success("Your task has been added.", {
+        position: "top-right",
+      });
+
+      setTask({
+        title: "",
+        content: "",
+        status: "none",
+      });
     } catch (error) {
       console.log(error);
+      toast.error("Task not added", {
+        position: "top-right",
+      });
     }
   };
 
