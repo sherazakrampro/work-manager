@@ -23,15 +23,38 @@ const SignUp = () => {
       });
       return;
     }
-    // Form submit
 
+    // Form submit
     try {
       const result = await signUp(signUpData);
       console.log(result);
       toast.success("User signed up successfully", {
         position: "top-right",
       });
-    } catch (error) {}
+      setSignUpData({
+        name: "",
+        email: "",
+        password: "",
+        about: "",
+        profileURL:
+          "https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg",
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error("User signed up failed");
+    }
+  };
+
+  // reset form
+  const resetForm = () => {
+    setSignUpData({
+      name: "",
+      email: "",
+      password: "",
+      about: "",
+      profileURL:
+        "https://static.vecteezy.com/system/resources/thumbnails/002/534/006/small/social-media-chatting-online-blank-profile-picture-head-and-body-icon-people-standing-icon-grey-background-free-vector.jpg",
+    });
   };
 
   return (
@@ -122,7 +145,11 @@ const SignUp = () => {
             >
               Signup
             </button>
-            <button className="bg-red-600 hover:bg-red-700 px-3 py-2 rounded-md ms-3">
+            <button
+              type="button"
+              className="bg-red-600 hover:bg-red-700 px-3 py-2 rounded-md ms-3"
+              onClick={resetForm}
+            >
               Reset
             </button>
           </div>
