@@ -28,12 +28,21 @@ export async function POST(request) {
       process.env.JWT_KEY
     );
 
+    // create response
+    const response = NextResponse.json({
+      message: "Login success",
+      success: true,
+    });
+
+    response.cookies.set("authToken", token, {
+      expiresIn: "1d",
+      httpOnly: true,
+    });
+
     console.log(user);
     console.log(token);
 
-    return NextResponse.json({
-      message: "success",
-    });
+    return response;
   } catch (error) {
     console.log(error);
     return NextResponse.json(
