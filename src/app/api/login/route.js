@@ -19,7 +19,7 @@ export async function POST(request) {
       throw new Error("Password not matched");
     }
 
-    // create a token
+    // generate a token
     const token = jwt.sign(
       {
         _id: user._id,
@@ -28,7 +28,7 @@ export async function POST(request) {
       process.env.JWT_KEY
     );
 
-    // create response
+    // create response - cookie
     const response = NextResponse.json({
       message: "Login success",
       success: true,
