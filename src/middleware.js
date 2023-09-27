@@ -7,8 +7,9 @@ export function middleware(request) {
   // getting token from cookie
   const authToken = request.cookies.get("authToken")?.value;
 
+  // if user is accessing the login api
   if (request.nextUrl.pathname === "/api/login") {
-    return;
+    return; // do nothing
   }
 
   const loggedInUserNotAccessPaths =
@@ -26,10 +27,6 @@ export function middleware(request) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }
-
-  console.log(authToken);
-
-  //   return NextResponse.redirect(new URL("/home", request.url));
 }
 
 // See "Matching Paths" below to learn more
