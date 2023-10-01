@@ -14,9 +14,7 @@ const UserProvider = ({ children }) => {
         setUser[{ ...loggedInUser }];
       } catch (error) {
         console.log(error);
-        toast.error("Error in loading current user", {
-          position: "top-right",
-        });
+        // toast.error("Error in loading current user")
         setUser(undefined);
       }
     }

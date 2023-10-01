@@ -2,6 +2,9 @@ import { User } from "@/models/user";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dbConnect from "@/helper/db";
+
+dbConnect();
 
 export async function POST(request) {
   const { email, password } = await request.json();
@@ -32,10 +35,11 @@ export async function POST(request) {
     const response = NextResponse.json({
       message: "Login success",
       success: true,
+      user: user,
     });
 
     response.cookies.set("authToken", token, {
-      expires: "1d",
+      expiresIn: "1d",
       httpOnly: true,
     });
 

@@ -1,11 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { login } from "@/services/userService";
 import { useRouter } from "next/navigation";
+import UserContext from "@/context/userContext";
 
 const Login = () => {
   const router = useRouter();
+  const context = useContext(UserContext);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -28,6 +30,7 @@ const Login = () => {
       toast.success("Logged in", {
         position: "top-right",
       });
+      context.setUser(result.user);
       //redirect
       router.push("/profile/user");
     } catch (error) {
