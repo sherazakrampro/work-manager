@@ -35,7 +35,7 @@ export async function POST(request) {
     });
 
     response.cookies.set("authToken", token, {
-      expiresIn: "1d",
+      expires: "1d",
       httpOnly: true,
     });
 
