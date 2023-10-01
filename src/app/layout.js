@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
+import UserProvider from "@/context/userProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -15,12 +16,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex flex-col justify-between">
-          <ToastContainer />
-          <Navbar />
-          <div className="mb-auto">{children}</div>
-          <Footer />
-        </div>
+        <UserProvider>
+          <div className="flex flex-col justify-between">
+            <ToastContainer />
+            <Navbar />
+            <div className="mb-auto">{children}</div>
+            <Footer />
+          </div>
+        </UserProvider>
       </body>
     </html>
   );
