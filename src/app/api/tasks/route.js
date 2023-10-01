@@ -1,11 +1,13 @@
-import { NextResponse } from "next/server";
-import { Task } from "@/models/task";
 import getResponseMessage from "@/helper/responseMessage";
+import { Task } from "@/models/task";
+import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import dbConnect from "@/helper/db";
 
 // Get all the Tasks
 export async function GET(request) {
   try {
+    await dbConnect();
     const tasks = await Task.find();
 
     return NextResponse.json(tasks, {
@@ -19,7 +21,7 @@ export async function GET(request) {
 
 // Create a Task
 export async function POST(request) {
-  const { title, content, userId } = await request.json();
+  const { title, content, userId, status } = await request.json();
 
   // fetching logged in user id
   const authToken = request.cookies.get("authToken")?.value;
@@ -33,7 +35,10 @@ export async function POST(request) {
       title,
       content,
       userId: data._id,
+      status,
     });
+
+    await dbConnect();
 
     const createdTask = await task.save();
 
